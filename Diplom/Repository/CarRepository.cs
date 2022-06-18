@@ -1,39 +1,22 @@
-﻿using Diplom.Entities;
+﻿using System.Linq;
+using Diplom.Entities;
 using Diplom.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Diplom.Repository
 {
-    public class CarRepository : ICarRepository
+    public class CarRepository : AuditableRepository<Car> ,ICarRepository
     {
         private readonly ParkSharingDBContext _dbContext;
-        public void Add(Car entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        public Car Get(int id)
+        public CarRepository(ParkSharingDBContext dbContext):base(dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
         public IList<Car> GetAll()
         {
-            throw new NotImplementedException();
-        }
-
-        public void Remove(Car entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Car entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CarRepository(ParkSharingDBContext dBContext):base()
-        {
-            _dbContext = dBContext;
+            return (IList<Car>)_dbContext.Users.ToList();//???? явного приведения быть не должно.
         }
     }
 }

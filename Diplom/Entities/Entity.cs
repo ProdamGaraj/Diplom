@@ -1,7 +1,10 @@
 ﻿namespace Diplom.Entities
 {
-    public class Entity
+    public abstract class Entity
     {
-        public int ID { get;}
+        public int Id { get; set; }
+        public Entity()
+        {
+        }
     }
 }

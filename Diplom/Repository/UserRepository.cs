@@ -3,32 +3,14 @@ using Diplom.Repository.IRepository;
 
 namespace Diplom.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : AuditableRepository<User> ,IUserRepository
     {
         private readonly ParkSharingDBContext _dbContext;
-        public void Add(User entity)
-        {
-            throw new NotImplementedException();
-        }
 
-        public User Get(int id)
-        {
-            throw new NotImplementedException();
-        }
 
-        public void Remove(User entity)
+        public UserRepository(ParkSharingDBContext dbContext):base(dbContext)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Update(User entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public UserRepository(ParkSharingDBContext dBContext):base()
-        {
-            _dbContext = dBContext;
+            _dbContext = dbContext;
         }
     }
 }

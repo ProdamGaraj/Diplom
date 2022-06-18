@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace Diplom.Entities
 {
-    public partial class Car:Entity
+    public partial class Car:AuditableEntity
     {
-        public int Id { get; set; }
         public int UserId { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

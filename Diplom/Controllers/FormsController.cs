@@ -7,17 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Diplom.Entities;
 using Diplom.Repository;
+using Diplom.Repository.IRepository;
 
 namespace Diplom.Controllers
 {
     [Route("[controller]")]
-    [ApiController]
+
     public class FormsController : Controller
     {
         private readonly ParkSharingDBContext _context;
+        private readonly IFormRepository _repository;
 
-        public FormsController(ParkSharingDBContext context)
+
+        public FormsController(ParkSharingDBContext context, IFormRepository repository)
         {
+            _repository = repository;
             _context = context;
         }
 
@@ -26,7 +30,7 @@ namespace Diplom.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Forms != null ?
-                        View(new List<Form>()) :
+                        View(_repository.Get(0)) :
                         Problem("Entity set 'ParkSharingDBContext.Forms'  is null.");
         }
         [HttpGet("{id}")]
