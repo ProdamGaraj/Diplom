@@ -1,4 +1,6 @@
-﻿namespace Diplom.Repository
+﻿using Diplom.Entities;
+
+namespace Diplom.Repository
 {
     public abstract class Repository<TEntity> where TEntity : class
     {
