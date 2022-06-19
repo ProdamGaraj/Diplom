@@ -5,10 +5,10 @@ namespace Diplom.Entities
 {
     public partial class Corporation : Entity
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public int AdminId { get; set; }
-        public string? Users { get; set; }
+        public virtual ICollection<User>? Users { get; set; }
+        public int ParkingPlaces { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

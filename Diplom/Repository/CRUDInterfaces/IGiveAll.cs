@@ -6,6 +6,6 @@ namespace Diplom.Repository.CRUDInterfaces
 {
     public interface IGiveAll<TEntity> where TEntity : class
     {
-        IList<TEntity> GetAll();
+        ICollection<TEntity> GetAll();
     }
 }

@@ -30,7 +30,7 @@ namespace Diplom.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Forms != null ?
-                        View(_repository.Get(0)) :
+                        View(_repository.GetAll()) :
                         Problem("Entity set 'ParkSharingDBContext.Forms'  is null.");
         }
         [HttpGet("{id}")]
@@ -77,7 +77,7 @@ namespace Diplom.Controllers
 
         private bool FormExists(int id)
         {
-          return (_context.Forms?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Forms?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

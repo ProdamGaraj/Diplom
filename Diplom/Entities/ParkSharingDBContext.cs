@@ -16,10 +16,10 @@ namespace Diplom.Entities
         {
         }
 
-        public virtual DbSet<Car> Cars { get; set; } = null!;
-        public virtual DbSet<Corporation> Corporations { get; set; } = null!;
-        public virtual DbSet<Form> Forms { get; set; } = null!;
-        public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Car> Cars { get; set; }
+        public virtual DbSet<Corporation> Corporations { get; set; }
+        public virtual DbSet<Form> Forms { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,74 +29,5 @@ namespace Diplom.Entities
                 optionsBuilder.UseSqlServer("Server=DESKTOP-EN58KEA;Database=ParkSharingDB;Trusted_Connection=True;");
             }
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Car>(entity =>
-            {
-                entity.ToTable("Car");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.CreatedAt).HasColumnType("date");
-            });
-
-            modelBuilder.Entity<Corporation>(entity =>
-            {
-                entity.ToTable("Corporation");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.CreatedAt).HasColumnType("date");
-
-                entity.Property(e => e.ModifiedAt).HasColumnType("date");
-
-                entity.Property(e => e.Name).HasMaxLength(50);
-
-                entity.Property(e => e.Users)
-                    .HasMaxLength(10)
-                    .IsFixedLength();
-            });
-
-            modelBuilder.Entity<Form>(entity =>
-            {
-                entity.ToTable("Form");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.CreatedAt).HasColumnType("date");
-
-                entity.Property(e => e.Date).HasColumnType("date");
-            });
-
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
-
-                entity.Property(e => e.CreatedAt).HasColumnType("date");
-
-                entity.Property(e => e.Login).HasMaxLength(50);
-
-                entity.Property(e => e.ModifiedAt).HasColumnType("date");
-
-                entity.Property(e => e.Password).HasMaxLength(50);
-
-                entity.Property(e => e.Post).HasMaxLength(50);
-
-                entity.Property(e => e.Rate).HasMaxLength(50);
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

@@ -8,15 +8,20 @@ namespace Diplom.Repository
         private readonly ParkSharingDBContext _dbContext;
         public void Add(Form entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Forms.Add(entity);
+            _dbContext.SaveChanges();
+        }
+
+        public ICollection<Form> GetAll()
+        {
+            return _dbContext.Forms.ToList();
         }
 
         public Form Get(int id)
         {
-            //TODO: realize interface
-            throw new NotImplementedException();
+            return _dbContext.Forms.Find(id);
         }
-        public FormRepository(ParkSharingDBContext dbContext):base()
+        public FormRepository(ParkSharingDBContext dbContext) : base()
         {
             _dbContext = dbContext;
         }

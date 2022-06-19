@@ -8,22 +8,24 @@ namespace Diplom.Repository
         private readonly ParkSharingDBContext _dbContext;
         public void Add(Car entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Cars.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public Car Get(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Cars.Find(id);
         }
 
-        public IList<Car> GetAll()
+        public ICollection<Car> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Cars.ToList();
         }
 
         public void Remove(Car entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Cars.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Update(Car entity)

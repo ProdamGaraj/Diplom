@@ -8,17 +8,32 @@ namespace Diplom.Repository
         private readonly ParkSharingDBContext _dbContext;
         public void Add(User entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Users.Add(entity);
+            _dbContext.SaveChanges();
+        }
+
+        public ICollection<User> GetAll()
+        {
+            return _dbContext.Users.ToList();
         }
 
         public User Get(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Users.Find(id);
         }
 
         public void Remove(User entity)
         {
-            throw new NotImplementedException();
+            foreach (var car in entity.Cars)
+            {
+                _dbContext.Cars.Remove(car);
+            }
+            foreach (var form in entity.Forms)
+            {
+                _dbContext.Forms.Remove(form);
+            }
+            _dbContext.Users.Remove(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Update(User entity)
@@ -26,7 +41,7 @@ namespace Diplom.Repository
             throw new NotImplementedException();
         }
 
-        public UserRepository(ParkSharingDBContext dBContext):base()
+        public UserRepository(ParkSharingDBContext dBContext) : base()
         {
             _dbContext = dBContext;
         }
